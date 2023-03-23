@@ -54,7 +54,15 @@ fn main() {
         .collect();
     let mut recv: Vec<[i32; 4]> = vec![[0, 0, 0, 0]; COUNT];
     mpi::request::multiple_scope(2 * COUNT, |scope, coll| {
-        send_recv(world, scope, coll, next_proc, prev_proc, &x, &mut recv);
+        send_recv(
+            universe.world(),
+            scope,
+            coll,
+            next_proc,
+            prev_proc,
+            &x,
+            &mut recv,
+        );
 
         let mut buf = vec![];
         while coll.incomplete() > 0 {
@@ -67,7 +75,15 @@ fn main() {
 
     let mut recv: Vec<[i32; 4]> = vec![[0, 0, 0, 0]; COUNT];
     mpi::request::multiple_scope(2 * COUNT, |scope, coll| {
-        send_recv(world, scope, coll, next_proc, prev_proc, &x, &mut recv);
+        send_recv(
+            universe.world(),
+            scope,
+            coll,
+            next_proc,
+            prev_proc,
+            &x,
+            &mut recv,
+        );
 
         let mut complete = vec![];
         let mut buf = vec![];
@@ -83,7 +99,15 @@ fn main() {
 
     let mut recv: Vec<[i32; 4]> = vec![[0, 0, 0, 0]; COUNT];
     mpi::request::multiple_scope(2 * COUNT, |scope, coll| {
-        send_recv(world, scope, coll, next_proc, prev_proc, &x, &mut recv);
+        send_recv(
+            universe.world(),
+            scope,
+            coll,
+            next_proc,
+            prev_proc,
+            &x,
+            &mut recv,
+        );
 
         let mut complete = vec![];
         while !coll.test_all(&mut complete) {}
